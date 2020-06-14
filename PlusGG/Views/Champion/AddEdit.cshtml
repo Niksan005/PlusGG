@@ -1,0 +1,181 @@
+﻿@model ChampionViewModel
+
+<h1>Add/Edit</h1>
+
+<h4>Champion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddEdit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <h3>Summoner Spells</h3>
+            <div class="row">
+                <div class="col-md-6 border py-2">
+                    <h4>Spell D</h4>
+                    <div class="form-group">
+                        <label asp-for="SummonerSpellDId" class="control-label"></label>
+                        <select asp-for="SummonerSpellDId" class="form-control" asp-items="Model.AllSummonerSpells">
+                            <option></option>
+                        </select>
+                        <span asp-validation-for="SummonerSpellDId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 border py-2">
+                    <h4>Spell F</h4>
+                    <div class="form-group">
+                        <label asp-for="SummonerSpellFId" class="control-label"></label>
+                        <select asp-for="SummonerSpellFId" class="form-control" asp-items="Model.AllSummonerSpells">
+                            <option></option>
+                        </select>
+                        <span asp-validation-for="SummonerSpellFId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <h3>Abilities</h3>
+            <div class="row">
+                <div class="col-md-4 border py-2">
+                    <h4>Passive</h4>
+                    <input type="hidden" asp-for="SpellP.Id" />
+                    <div class="form-group">
+                        <label asp-for="SpellP.Name" class="control-label"></label>
+                        <input asp-for="SpellP.Name" class="form-control" />
+                        <span asp-validation-for="SpellP.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellP.Description" class="control-label"></label>
+                        <textarea asp-for="SpellP.Description" class="form-control"></textarea>
+                        <span asp-validation-for="SpellP.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellP.Image" class="control-label"></label>
+                        @if (Model.SpellP != null && !string.IsNullOrWhiteSpace(Model.SpellP.ImageSrc))
+                        {
+                            <img src="@Model.SpellP.ImageSrc" />
+                        }
+                        <input asp-for="SpellP.Image" class="form-control" type="file" />
+                        <span asp-validation-for="SpellP.Image" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 border py-2">
+                    <h4>Ability Q</h4>
+                    <input type="hidden" asp-for="SpellQ.Id" />
+                    <div class="form-group">
+                        <label asp-for="SpellQ.Name" class="control-label"></label>
+                        <input asp-for="SpellQ.Name" class="form-control" />
+                        <span asp-validation-for="SpellQ.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellQ.Description" class="control-label"></label>
+                        <textarea asp-for="SpellQ.Description" class="form-control"></textarea>
+                        <span asp-validation-for="SpellQ.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellQ.Image" class="control-label"></label>
+                        @if (Model.SpellQ != null && !string.IsNullOrWhiteSpace(Model.SpellQ.ImageSrc))
+                        {
+                            <img src="@Model.SpellQ.ImageSrc" />
+                        }
+                        <input asp-for="SpellQ.Image" class="form-control" type="file" />
+                        <span asp-validation-for="SpellQ.Image" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 border py-2">
+                    <h4>Ability W</h4>
+                    <input type="hidden" asp-for="SpellW.Id" />
+                    <div class="form-group">
+                        <label asp-for="SpellW.Name" class="control-label"></label>
+                        <input asp-for="SpellW.Name" class="form-control" />
+                        <span asp-validation-for="SpellW.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellW.Description" class="control-label"></label>
+                        <textarea asp-for="SpellW.Description" class="form-control"></textarea>
+                        <span asp-validation-for="SpellW.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellW.Image" class="control-label"></label>
+                        @if (Model.SpellW != null && !string.IsNullOrWhiteSpace(Model.SpellW.ImageSrc))
+                        {
+                            <img src="@Model.SpellW.ImageSrc" />
+                        }
+                        <input asp-for="SpellW.Image" class="form-control" type="file" />
+                        <span asp-validation-for="SpellW.Image" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 border py-2">
+                    <h4>Ability E</h4>
+                    <input type="hidden" asp-for="SpellE.Id" />
+                    <div class="form-group">
+                        <label asp-for="SpellE.Name" class="control-label"></label>
+                        <input asp-for="SpellE.Name" class="form-control" />
+                        <span asp-validation-for="SpellE.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellE.Description" class="control-label"></label>
+                        <textarea asp-for="SpellE.Description" class="form-control"></textarea>
+                        <span asp-validation-for="SpellE.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellE.Image" class="control-label"></label>
+                        @if (Model.SpellE != null && !string.IsNullOrWhiteSpace(Model.SpellE.ImageSrc))
+                        {
+                            <img src="@Model.SpellE.ImageSrc" />
+                        }
+                        <input asp-for="SpellE.Image" class="form-control" type="file" />
+                        <span asp-validation-for="SpellE.Image" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2 border py-2">
+                    <h4>Ability R</h4>
+                    <input type="hidden" asp-for="SpellR.Id" />
+                    <div class="form-group">
+                        <label asp-for="SpellR.Name" class="control-label"></label>
+                        <input asp-for="SpellR.Name" class="form-control" />
+                        <span asp-validation-for="SpellR.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellR.Description" class="control-label"></label>
+                        <textarea asp-for="SpellR.Description" class="form-control"></textarea>
+                        <span asp-validation-for="SpellR.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SpellR.Image" class="control-label"></label>
+                        @if (Model.SpellR != null && !string.IsNullOrWhiteSpace(Model.SpellR.ImageSrc))
+                        {
+                            <img src="@Model.SpellR.ImageSrc" />
+                        }
+                        <input asp-for="SpellR.Image" class="form-control" type="file" />
+                        <span asp-validation-for="SpellR.Image" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                @if (!string.IsNullOrWhiteSpace(Model.ImageSrc))
+                {
+                    <img src="@Model.ImageSrc" />
+                }
+                <input asp-for="Image" class="form-control" type="file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

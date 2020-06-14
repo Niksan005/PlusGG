@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MatchUpViewModel>
+
+<h1>MatchUp</h1>
+
+<p>
+    <a asp-action="AddEdit" asp-route-id="0" asp-route-cid="@ViewData["cid"]">Create New</a>
+</p>
+<table class="table tags">
+    <thead>
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WinRate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.VsChampion.ImageSrc != null)
+                    {
+                        <img src="@item.VsChampion.ImageSrc" alt="Alternate Text" />
+                    }
+                    else
+                    {
+                        <img src="http://placehold.it/50x50/0a0/fff&text=B32%22%3E" alt="Alternate Text" />
+                    }
+                </td>
+                <td>
+                    @Html.Raw(item.WinRate)
+                </td>
+                <td>
+                    <a asp-action="AddEdit" asp-route-id="@item.Id" asp-route-cid="@ViewData["cid"]">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-cid="@ViewData["cid"]">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

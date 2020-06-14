@@ -1,0 +1,295 @@
+﻿@model MainPageViewModel
+
+
+<input type="hidden" asp-for="cid" />
+<div class="container border">
+    <div class="row">
+        <div class="col-lg-12 ">
+
+            <label asp-for="Champion" class="control-label"></label>
+            <input type="hidden" asp-for="@Model.Champion" />
+            <div class="ui search search-main-champion">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="Search Champion...">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+
+        </div>
+    </div>
+    @if (Model.Champion != null)
+    {
+        <div class="row">
+            <div class="col-lg-1 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.ImageSrc" alt="Champion Image" />
+            </div>
+            <div class="col-lg-11 p-3" style="background-color : lightgray">
+                <h1>@Model.Champion.Name</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.SpellP.ImageSrc"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="@Model.Champion.SpellP.Description" alt="Champion Spell P Image" />
+            </div>
+            <div class="col-lg-1 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.SpellQ.ImageSrc"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="@Model.Champion.SpellQ.Description" alt="Champion Spell Q Image" />
+            </div>
+            <div class="col-lg-1 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.SpellW.ImageSrc"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="@Model.Champion.SpellW.Description" alt="Champion Spell W Image" />
+            </div>
+            <div class="col-lg-1 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.SpellE.ImageSrc"
+                     data-toggle="tooltip"
+                     data-placement="top"
+                     title="@Model.Champion.SpellE.Description" alt="Champion Spell E Image" />
+            </div>
+            <div class="col-lg-2 p-3" style="background-color : lightgray">
+                <img src="@Model.Champion.SpellR.ImageSrc"
+                     data-toggle="tooltip"
+                     data-html="true"
+                     data-placement="top"
+                     title="@Model.Champion.SpellR.Name<br />@Model.Champion.SpellR.Description" alt="Champion Spell R Image" />
+            </div>
+            <div class="col-lg-6 p-3" style="background-color : lightgray">
+                <div class="row">
+                    <div class="col-lg-6 p-1" style="background-color : lightgray">
+                        <label asp-for="Champion" class="control-label"></label>
+                        <input type="hidden" asp-for="@Model.Champion" />
+                        <div class="ui search search-vs-champion">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text" placeholder="Search Vs Champion...">
+                                <i class="search icon"></i>
+                            </div>
+                            <div class="results"></div>
+                        </div>
+                    </div>
+                    @if (Model.VsChampion.VsChampion != null)
+                    {
+                        <div class="col-lg-2 p-3" style="background-color : lightgray">
+                            <img src="@Model.VsChampion.VsChampion.ImageSrc" alt="Champion Image" />
+                        </div>
+                        <div class="col-lg-3 p-3" style="background-color : lightgray">
+                            <h1>@Model.VsChampion.VsChampion.Name</h1>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 border p-0">
+                <div class="form-group border  p-2 ">
+                    @Html.DisplayNameFor(model => model.VsChampion.PrimaryRuneCategoryId)
+                    <br />
+                    @foreach (var runeCategory in Model.VsChampion.AllRuneCategories)
+                    {
+                        <label>
+                            <input type="radio"
+                                   asp-for="VsChampion.PrimaryRuneCategoryId"
+                                   value="@runeCategory.Id"
+                                   data-bind="reveal" />
+                            <img src="@runeCategory.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@runeCategory.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="VsChampion.PrimaryRuneCategoryId" class="text-danger"></span>
+                </div>
+                <div class="border p-2">
+                    <div class="form-group">
+                        @foreach (var mainRune in Model.VsChampion.AllMainRunes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.PrimaryMainRuneId" value="@mainRune.Id" disabled />
+                                <img src="@mainRune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@mainRune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.PrimaryMainRuneId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group border  p-2 ">
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel1Runes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.PrimaryLevel1RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.PrimaryLevel1RuneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel2Runes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.PrimaryLevel2RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.PrimaryLevel2RuneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel3Runes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.PrimaryLevel3RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.PrimaryLevel3RuneId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 border p-0">
+                <div class="form-group border  p-2 ">
+                    @Html.DisplayNameFor(model => model.VsChampion.SecondaryRuneCategoryId)
+                    <br />
+                    @foreach (var runeCategory in Model.VsChampion.AllSecondaryRuneCategories)
+                    {
+                        <label>
+                            <input type="radio"
+                                   asp-for="VsChampion.SecondaryRuneCategoryId"
+                                   value="@runeCategory.Id"
+                                   data-bind="reveal" />
+                            <img src="@runeCategory.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@runeCategory.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="VsChampion.SecondaryRuneCategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group border  p-2 ">
+
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel1SecondaryRunes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.SecondaryLevel1RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.SecondaryLevel1RuneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel2SecondaryRunes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.SecondaryLevel2RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.SecondaryLevel2RuneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @foreach (var rune in Model.VsChampion.AllLevel3SecondaryRunes)
+                        {
+                            <label>
+                                <input type="radio" asp-for="VsChampion.SecondaryLevel3RuneId" value="@rune.Id" disabled />
+                                <img src="@rune.ImageSrc"
+                                     data-toggle="tooltip"
+                                     data-placement="top"
+                                     title="@rune.Description" />
+                            </label>
+                        }
+                        <br />
+                        <span asp-validation-for="VsChampion.SecondaryLevel3RuneId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 border p-0" style="background-color : lightgray">
+                <div class="col-md-12 border p-3">
+                    <p>Summoner Spells</p>
+                    <label>
+                        <img src="@Model.Champion.SummonerSpellD.ImageSrc"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="@Model.Champion.SummonerSpellD.Description" />
+                    </label>
+                    <label>
+                        <img src="@Model.Champion.SummonerSpellF.ImageSrc"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="@Model.Champion.SummonerSpellF.Description" />
+                    </label>
+                </div>
+                <div class="col-md-12 border p-3">
+                    <p>Countered By:</p>
+                    @foreach (var vschampion in Model.AllVsChamps)
+                    {
+                        <label>
+                            <img src="@vschampion.VsChampion.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-toggle="tooltip"
+                                 data-html="true"
+                                 data-placement="top"
+                                 title="@vschampion.VsChampion.Name<br />@vschampion.WinRate %" />
+
+                        </label>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 border p-3">
+                <p>Items:</p>
+                @foreach (var item in Model.VsChampion.Items)
+                {
+                    <label>
+                        <img src="@item.ImageSrc"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="@item.Name" />
+
+                    </label>
+                }
+            </div>
+            <div class="col-md-4 border p-3" style="background-color:lightgray">
+                <!-- Spell Level up -->
+            </div>
+        </div>
+    }
+</div>

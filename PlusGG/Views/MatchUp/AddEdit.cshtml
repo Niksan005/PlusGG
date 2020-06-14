@@ -1,0 +1,230 @@
+﻿@model MatchUpViewModel
+<!--                   Resourse                  -->
+<!--  https://codepen.io/chriscoyier/pen/LEGXOK  -->
+
+<h1>Add/Edit</h1>
+
+<h4>MatchUp</h4>
+<hr />
+<form asp-action="AddEdit" asp-route-cid="@ViewData["cid"]" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12 p-2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="VsChampionId" class="control-label"></label>
+                <select asp-for="VsChampionId" class="form-control" asp-items="Model.AllChampions">
+                    <option></option>
+                </select>
+                <span asp-validation-for="VsChampionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WinRate" class="control-label"></label>
+                <input asp-for="WinRate" class="form-control" />
+                <span asp-validation-for="WinRate" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+                <input asp-for="StrongerEarly" class="form-check-input" />
+                <label asp-for="StrongerEarly" class="form-check-label"></label>
+            </div>
+            <div class="form-check">
+                <input asp-for="StrongerMid" class="form-check-input" />
+                <label asp-for="StrongerMid" class="form-check-label"></label>
+            </div>
+            <div class="form-check">
+                <input asp-for="StrongerLate" class="form-check-input" />
+                <label asp-for="StrongerLate" class="form-check-label"></label>
+            </div>
+        </div>
+
+        <div class="col-md-6 border p-0">
+            <div class="form-group border  p-2 ">
+                @Html.DisplayNameFor(model => model.PrimaryRuneCategoryId)
+                <br />
+                @foreach (var runeCategory in Model.AllRuneCategories)
+                {
+                    <label>
+                        <input type="radio"
+                               asp-for="PrimaryRuneCategoryId"
+                               value="@runeCategory.Id"
+                               data-bind="reveal" />
+                        <img src="@runeCategory.ImageSrc"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="@runeCategory.Description" />
+                    </label>
+                }
+                <br />
+                <span asp-validation-for="PrimaryRuneCategoryId" class="text-danger"></span>
+            </div>
+            <div class="border p-2">
+                <div class="form-group">
+                    @foreach (var mainRune in Model.AllMainRunes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=PrimaryRuneCategoryId][value=@mainRune.RuneCategoryId]">
+                            <input type="radio" asp-for="PrimaryMainRuneId" value="@mainRune.Id" />
+                            <img src="@mainRune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@mainRune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="PrimaryMainRuneId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group border  p-2 ">
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel1Runes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=PrimaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="PrimaryLevel1RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="PrimaryLevel1RuneId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel2Runes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=PrimaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="PrimaryLevel2RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="PrimaryLevel2RuneId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel3Runes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=PrimaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="PrimaryLevel3RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="PrimaryLevel3RuneId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 border p-0">
+            <div class="form-group border  p-2 ">
+                @Html.DisplayNameFor(model => model.SecondaryRuneCategoryId)
+                <br />
+                @foreach (var runeCategory in Model.AllSecondaryRuneCategories)
+                {
+                    <label>
+                        <input type="radio"
+                               asp-for="SecondaryRuneCategoryId"
+                               value="@runeCategory.Id"
+                               data-bind="reveal" />
+                        <img src="@runeCategory.ImageSrc"
+                             data-toggle="tooltip"
+                             data-placement="top"
+                             title="@runeCategory.Description" />
+                    </label>
+                }
+                <br />
+                <span asp-validation-for="SecondaryRuneCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group border  p-2 ">
+
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel1SecondaryRunes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=SecondaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="SecondaryLevel1RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="SecondaryLevel1RuneId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel2SecondaryRunes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=SecondaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="SecondaryLevel2RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="SecondaryLevel2RuneId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @foreach (var rune in Model.AllLevel3SecondaryRunes)
+                    {
+                        <label class="reveal-if-active" data-reveal-pair="input[name=SecondaryRuneCategoryId][value=@rune.RuneCategoryId]">
+                            <input type="radio" asp-for="SecondaryLevel3RuneId" value="@rune.Id" />
+                            <img src="@rune.ImageSrc"
+                                 data-toggle="tooltip"
+                                 data-placement="top"
+                                 title="@rune.Description" />
+                        </label>
+                    }
+                    <br />
+                    <span asp-validation-for="SecondaryLevel3RuneId" class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12 p-2">
+            <div class="form-group">
+                <label asp-for="ItemIDs" class="control-label"></label>
+                <input type="hidden" asp-for="@Model.ItemIDs" />
+                <div class="ui search search-item">
+                    <div class="ui icon input">
+                        <input class="prompt" type="text" placeholder="Search Items...">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                </div>
+
+                <div id="item-list">
+                    <ul id="list">
+                        @foreach (ItemViewModel item in Model.Items)
+                        {
+                            <li data-id="@item.Id"><img src="@item.ImageSrc"> @item.Name <button onclick='RemoveThis(this)'>X</button></li>
+                        }
+                    </ul>
+                </div>
+
+                <span asp-validation-for="ItemIDs" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-12 p-2">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-route-cid="@ViewData["cid"]">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

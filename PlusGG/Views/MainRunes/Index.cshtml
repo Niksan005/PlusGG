@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MainRunesViewModel>
+
+<h1>Main Runes</h1>
+<p>
+    <a asp-action="AddEdit" asp-route-id="0">Create New</a>
+</p>
+<table class="table tags">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageSrc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RuneCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sort)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.RuneCategoryName).ThenBy(x => x.Sort))
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImageSrc" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.Raw(item.Description)
+                </td>
+                <td>
+                    @Html.Raw(item.RuneCategoryName)
+                </td>
+                <td>
+                    @Html.Raw(item.Sort)
+                </td>
+                <td>
+                    <a asp-action="AddEdit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
